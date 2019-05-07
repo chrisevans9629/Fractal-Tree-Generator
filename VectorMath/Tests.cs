@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace VectorMath
 {
     [TestFixture]
-    public class Class1
+    public class Tests
     {
         [Test]
         public void SubtractAndRotate()
