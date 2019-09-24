@@ -12,7 +12,7 @@ namespace VectorMath
     public class LineVector
     {
         public double StrokeThickness = 1;
-       static Random r = new Random();
+        static Random r = new Random();
         public static implicit operator Line(LineVector a)
         {
             Color randomColor = new Color();
@@ -36,7 +36,7 @@ namespace VectorMath
             var canvas = a.Parent as Canvas;
             if (canvas != null)
             {
-                return new LineVector(canvas, new Vector(a.X1,a.Y1), new Vector(a.X2, a.Y2) );
+                return new LineVector(canvas, new Vector(a.X1, a.Y1), new Vector(a.X2, a.Y2));
             }
             return null;
         }
@@ -83,10 +83,10 @@ namespace VectorMath
         {
             Vector vect;
             if (Init(out vect)) return null;
-            var rot = VectorUtil.Rotate(vect, -Angle  * RandomVariation());
+            var rot = VectorUtil.Rotate(vect, -Angle * RandomVariation());
             var newvect = _end + rot;
             //Draw(_end, newvect);
-            
+
             return new LineVector(_grid, _end, newvect);
 
         }
@@ -106,41 +106,46 @@ namespace VectorMath
         public bool MultiThread = true;
         private bool finished = false;
 
-        public async Task Draw()
+        public async Task DrawAnimation(bool isAnimated)
         {
             Line line = this;
             _grid.Children.Add(line);
             var len = _end - _begin;
             var step = len / slowdown;
             var i = Vector.Zero;
-            CompositionTarget.Rendering += (sender, args) =>
+            if (isAnimated)
             {
-                if ((i.Abs() - len.Abs()).Length > 2)
+                CompositionTarget.Rendering += (sender, args) =>
                 {
-                    i += step;
-                    var place = _begin + i;
-                    line.X2 = place.X;
-                    line.Y2 = place.Y;
-                }
-                else
-                {
-                    finished = true;
-                }
-            };
-           await Task.Factory.StartNew(() =>
-            {
-                if (MultiThread != true)
-                {
-                    //Thread.Sleep(1);
-                    while (finished != true)
+                    if ((i.Abs() - len.Abs()).Length > 2)
                     {
-
+                        i += step;
+                        var place = _begin + i;
+                        line.X2 = place.X;
+                        line.Y2 = place.Y;
                     }
-                }
-               
-            });
+                    else
+                    {
+                        finished = true;
+                    }
+                };
+                await Task.Factory.StartNew(() =>
+                {
+                    if (MultiThread != true)
+                    {
+                        //Thread.Sleep(1);
+                        while (finished != true)
+                        {
+
+                        }
+                    }
+
+                });
+            }
+           
+
         }
 
-       
+
     }
 }
