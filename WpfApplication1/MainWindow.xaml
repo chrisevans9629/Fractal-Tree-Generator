@@ -7,7 +7,7 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:helix="http://helix-toolkit.org/wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800" d:DataContext="{d:DesignInstance local:MainWindow}">
+        Title="MainWindow" Height="600" Width="800" d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="607*"/>
@@ -44,7 +44,8 @@
             <Slider Value="{Binding Length}" Minimum="0" Maximum="0.8"></Slider>
             <Label>Variation</Label>
             <Slider Value="{Binding Variation}" Minimum="0" Maximum="99"></Slider>
-            <Button Content="Generate"  Click="Button_Click"></Button>
+            <Button Content="Generate"  Command="{Binding GenerateCommand}"></Button>
+            <Button Content="Cancel"  Command="{Binding CancelCommand}"></Button>
             <TextBlock MinHeight="50" Text="{Binding Output}"></TextBlock>
         </StackPanel>
     </Grid>
