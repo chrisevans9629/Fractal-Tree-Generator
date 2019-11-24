@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CylinderVector.cs" />
+    <Compile Include="PenTool.cs" />
     <Compile Include="Tests.cs" />
     <Compile Include="LineVector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
