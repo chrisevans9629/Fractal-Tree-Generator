@@ -5,3 +5,7 @@ Creates a fractal tree using WPF with different options, such as length, variati
 
 ![](/assets/tree1.PNG)
 ![](/assets/tree2.PNG)
+
+
+![](/assets/tree1.gif)
+![](/assets/tree2.gif)
